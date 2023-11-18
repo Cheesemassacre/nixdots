@@ -1,0 +1,43 @@
+super + e ; w ; w ; w
+        floorp
+super + e ; t 
+	thunar
+    
+super + e ; p ; r ; o
+	./processkiller.sh &
+
+super + e ; s ; p
+    spotify
+
+super + e ; p ; k
+    floorp -- https://search.nixos.org/packages
+
+super + shift + plus
+    pamixer -i 5 
+
+super + shift + apostrophe
+    pamixer -d 5 
+
+super + e ; d ; i
+    vencorddesktop
+
+super + c
+    qalculate-gtk
+
+super + s
+    xfce4-screenshooter
+
+super + n
+    st -e vim Notes
+
+super + shift + e
+    ./poweopt.sh &
+
+super + e ; w ; a ; l
+    ./wallpapers.sh &
+
+super + shift + s
+    ./sleep.sh &
+
+super + shift + r
+    rofi -show drun
