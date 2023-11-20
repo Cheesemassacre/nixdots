@@ -82,7 +82,7 @@
     settings = {
       urgency_normal = {
       background = "#000000";
-    foreground = "#ffffff";
+      foreground = "#ffffff";
       timeout = 15;
      };
     };
@@ -94,7 +94,7 @@
     settings = {
       font_family  =    "Hack";
       italic_font  =    "Hack Italic";
-      bold_font   =     "Hack Bold";
+      bold_font    =    "Hack Bold";
       bold_italic_font = "Hack Bold Italic";
       confirm_os_window_close = 0;
       background_opacity = "0.3";
@@ -105,11 +105,12 @@
     };
   };
   
-  gtk.enable = true;
-
-  gtk.gtk3.extraConfig = {
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
     gtk-theme-name = "Material-Black-Blueberry";
     gtk-icon-theme-name = "Tela-blue-dark";
+    };
   };
 
   services.sxhkd = {
@@ -162,6 +163,25 @@
      '';
   };
   
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+    ".." = "cd ..";
+    "c" = "clear";
+  };
+    bashrcExtra = ''
+    eval "$(oh-my-posh init bash --config ~/.config/theme.omp.json)"
+  '';
+  };
+
+  xsession = {
+    enable = true;
+    profileExtra = ''
+    sxhkd &
+    feh --bg-scale /home/marin/Pictures/wallhaven-x69wyo.png
+    /home/marin/dwm-bar/dwm_bar.sh &
+  '';
+  };
 
   
 
