@@ -1,19 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int snap      = 0;       /* snap pixel */
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Hack:pixelsize=12:antialias=true:autohint=true:style=SemiBold" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#000000"; /* podloga bara */
-static const char col_gray2[]       = "#1c1c1c"; /* neaktivni prozor */
+static const char col_gray2[]       = "#dcdcdc"; /* neaktivni prozor */
 static const char col_gray3[]       = "#d3d3d3"; /* neaktivni tag */
-static const char col_gray4[]       = "#d3d3d3"; /* naslov i aktivni tag tekst */
-static const char col_cyan[]        = "#241571"; /* aktivni naslov i tag */
+static const char col_gray4[]       = "#000000"; /* naslov i aktivni tag tekst */
+static const char col_cyan[]        = "#dcdcdc"; /* aktivni naslov i tag */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -21,7 +21,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "TTY", "WWW", "FMG", "MUS", "SOC", "6", "7", "8", "9" };
+static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -39,6 +39,9 @@ static const Rule rules[] = {
 	{ NULL,                   NULL,   "Event Tester", 0,            0,           0,          1,         -1 }, /* xev */
 };
 
+
+
+
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
@@ -47,8 +50,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "[]=",      tile },    /* first entry is default */
 	{ "[M]",      monocle },
 };
 
@@ -65,8 +68,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-l", "10", "-c", "-hp", "thunar,brave,spotify,vencord-desktop,xfce4-power-manager,code,transmission-gtk,midori" }; 
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *clipcmd[]  = { "clipmenu", NULL };
+
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -104,6 +108,7 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ MODKEY,                       XK_x,      movecenter,     {0} },
 	
 
 
