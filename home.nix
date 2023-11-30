@@ -192,35 +192,22 @@
     width = "9%";
     height = "24pt";
     radius = 0;
-
-
     background = "#000000";
     foreground = "#C5C8C6";
-
     line-size = "3pt";
-
     border-size = "2pt";
     border-color = "#C5C8C6";
-
     padding-left = 0;
     padding-right = 1;
-
     module-margin = 1;
-
     separator = "|";
     separator-foreground = "#707880";
-
     font-0 = "NotoSans:weight=bold;2";
     modules-center = "cpu memory";
-
-
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
-
     override-redirect = "true";
-
     bottom = "true";
-
     enable-ipc = "true";
     };
 
@@ -228,93 +215,60 @@
     width = "9%";
     height = "24pt";
     radius = 0;
-
     bottom = "true";
-
     offset-x = "91%";
-
     background = "#000000";
     foreground = "#C5C8C6";
-
     line-size = "3pt";
-
     border-size = "2pt";
     border-color = "#C5C8C6";
-
     padding-left = 0;
     padding-right = 1;
-
     module-margin = 1;
-
     separator = "|";
     separator-foreground = "#707880";
-
     font-0 = "NotoSans:weight=bold;2";
     modules-center = "date ";
-
-
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
-
     enable-ipc = "true";
-
     wm-restack = "generic";
-
     override-redirect = "true";
-
     };
 
     "bar/workind" = {
     width = "2%";
     height = "24pt";
     radius = 0;
-
-
     background = "#C5C8C6";
     foreground = "#000000";
-
-
-
-
     line-size = "0pt";
-
     border-size = "2pt";
     border-color = "#000000";
-
     padding-left = 0;
     padding-right = 1;
-
     module-margin = 1;
-
     separator = "|";
     separator-foreground = "#707880";
-
     font-0 = "NotoSans:weight=bold;2";
     font-1 = "NotoSansCJKJP:style=bold:antialias=true;2";
     modules-center = "xworkspaces";
-
-
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
-
     override-redirect = "true";
     };
 
     "module/xworkspaces" = {
     type = "internal/xworkspaces";
-
     label-active = "%name%";
     label-active-background = "#C5C8C6";
     label-active-underline= "#C5C8C6";
     label-active-padding = 1;
-
     label-occupied = "";
     label-occupied-padding = 1;
-
     label-urgent = "%name%";
     label-urgent-background = "#A54242";
     label-urgent-padding = 1;
-
     label-empty = "";
     label-empty-foreground = "#707880";
     label-empty-padding = 1;
@@ -345,10 +299,8 @@
     "module/date" = {
     type = "internal/date";
     interval = 1;
-
     date = "%H:%M";
     date-alt = "%d-%m %H:%M";
-
     label = "%date%";
     label-foreground = "#C5C8C6";
     label-active-font = 1;
