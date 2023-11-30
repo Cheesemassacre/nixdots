@@ -88,28 +88,28 @@
     };
   };
 
-  programs.kitty = {
+ /*  programs.kitty = {
     enable = true;
-    theme = "Tango Dark";
+    theme = "~/.config/kitty/theme.conf";
     settings = {
       font_family  =    "Hack";
       italic_font  =    "Hack Italic";
       bold_font    =    "Hack Bold";
       bold_italic_font = "Hack Bold Italic";
       confirm_os_window_close = 0;
-      background_opacity = "0.3";
-      window_logo_path = "/home/marin/Pictures/pngwing.com(1)(1).png";
+      background_opacity = "1.0";
+      # window_logo_path = "/home/marin/Pictures/pngwing.com(1)(1).png";
       window_logo_position = "bottom-right";
-      window_logo_alpha = "0.6";
+      window_logo_alpha = "0.8";
       window_margin_width = 5;
     };
-  };
+  }; */
   
   gtk = {
     enable = true;
     gtk3.extraConfig = {
     gtk-theme-name = "Material-Black-Blueberry";
-    gtk-icon-theme-name = "Tela-blue-dark";
+    gtk-icon-theme-name = "Tela-grey-dark";
     };
   };
 
@@ -130,35 +130,21 @@
     super + e ; p ; k
         floorp -- https://search.nixos.org/packages
 
-    super + shift + plus
-        pamixer -i 5 
-
-    super + shift + apostrophe
-        pamixer -d 5 
+    super + b
+        pavucontrol
 
     super + e ; d ; i
         vencorddesktop
 
-    super + c
-        qalculate-gtk
-
     super + s
         xfce4-screenshooter
-
-    super + n
-        st -e vim Notes
 
     super + shift + e
         ./poweopt.sh &
 
-    super + e ; w ; a ; l
-        ./wallpapers.sh &
-
-    super + shift + s
-        ./sleep.sh &
-
-    super + shift + r
+    super + d
         rofi -show drun
+
      
      '';
   };
@@ -174,15 +160,213 @@
   '';
   };
 
-  xsession = {
+    xsession = {
     enable = true;
     profileExtra = ''
     sxhkd &
-    feh --bg-scale /home/marin/Pictures/wallhaven-x69wyo.png
+    feh --bg-scale /home/marin/Pictures/wallhaven-3l6xw6.png
     /home/marin/dwm-bar/dwm_bar.sh &
+    polybar topleft &
+    polybar botright &
+    polybar workind &
   '';
+  }; 
+
+  services.polybar.enable = true;
+
+  services.polybar.config = {
+  "colors" = {
+    background = "#000000";
+    background-alt = "#000000";
+    foreground = "#C5C8C6";
+    primary = "#C5C8C6";
+    secondary = "#8ABEB7";
+    alert = "#A54242";
+    disabled = "#707880";
+    text = "#000000";
+      };
+
+
+
+    "bar/topleft" = {
+    width = "9%";
+    height = "24pt";
+    radius = 0;
+
+
+    background = "#000000";
+    foreground = "#C5C8C6";
+
+    line-size = "3pt";
+
+    border-size = "2pt";
+    border-color = "#C5C8C6";
+
+    padding-left = 0;
+    padding-right = 1;
+
+    module-margin = 1;
+
+    separator = "|";
+    separator-foreground = "#707880";
+
+    font-0 = "NotoSans:weight=bold;2";
+    modules-center = "cpu memory";
+
+
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+
+    override-redirect = "true";
+
+    bottom = "true";
+
+    enable-ipc = "true";
+    };
+
+    "bar/botright" = {
+    width = "9%";
+    height = "24pt";
+    radius = 0;
+
+    bottom = "true";
+
+    offset-x = "91%";
+
+    background = "#000000";
+    foreground = "#C5C8C6";
+
+    line-size = "3pt";
+
+    border-size = "2pt";
+    border-color = "#C5C8C6";
+
+    padding-left = 0;
+    padding-right = 1;
+
+    module-margin = 1;
+
+    separator = "|";
+    separator-foreground = "#707880";
+
+    font-0 = "NotoSans:weight=bold;2";
+    modules-center = "date ";
+
+
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+
+    enable-ipc = "true";
+
+    wm-restack = "generic";
+
+    override-redirect = "true";
+
+    };
+
+    "bar/workind" = {
+    width = "2%";
+    height = "24pt";
+    radius = 0;
+
+
+    background = "#C5C8C6";
+    foreground = "#000000";
+
+
+
+
+    line-size = "0pt";
+
+    border-size = "2pt";
+    border-color = "#000000";
+
+    padding-left = 0;
+    padding-right = 1;
+
+    module-margin = 1;
+
+    separator = "|";
+    separator-foreground = "#707880";
+
+    font-0 = "NotoSans:weight=bold;2";
+    font-1 = "NotoSansCJKJP:style=bold:antialias=true;2";
+    modules-center = "xworkspaces";
+
+
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+
+    override-redirect = "true";
+    };
+
+    "module/xworkspaces" = {
+    type = "internal/xworkspaces";
+
+    label-active = "%name%";
+    label-active-background = "#C5C8C6";
+    label-active-underline= "#C5C8C6";
+    label-active-padding = 1;
+
+    label-occupied = "";
+    label-occupied-padding = 1;
+
+    label-urgent = "%name%";
+    label-urgent-background = "#A54242";
+    label-urgent-padding = 1;
+
+    label-empty = "";
+    label-empty-foreground = "#707880";
+    label-empty-padding = 1;
+    label-active-font = 2;
+    };
+
+
+
+    "module/memory" = {
+    type = "internal/memory";
+    interval = 2;
+    format-prefix = "RAM ";
+    format-prefix-foreground = "#C5C8C6";
+    label = "%percentage_used:2%%";
+    label-active-font = 1;
+    };
+
+
+    "module/cpu" = {
+    type = "internal/cpu";
+    interval = 2;
+    format-prefix = "CPU ";
+    format-prefix-foreground = "#C5C8C6";
+    label = "%percentage:2%%";
+    label-active-font = 1;
+    };
+
+    "module/date" = {
+    type = "internal/date";
+    interval = 1;
+
+    date = "%H:%M";
+    date-alt = "%d-%m %H:%M";
+
+    label = "%date%";
+    label-foreground = "#C5C8C6";
+    label-active-font = 1;
+    };
+
+    "settings" = {
+    screenchange-reload = "true";
+    pseudo-transparency = "false";
+    };
   };
 
+  services.polybar.script = ''
+    "polybar topleft &amp;"
+    "polybar botright &amp;"
+    "polybar workind &amp;"
+  ''
+  ;
+ 
   
 
 
