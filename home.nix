@@ -66,18 +66,22 @@
     # EDITOR = "emacs";
   };
 
-  services.picom = {
+   services.picom = {
     enable = true;
     vSync = true;
     backend = "glx";
+    shadow = false;
+    shadowExclude = [
+   "window_type = 'dock'"
+    ];
   };
-
+ 
   
-  services.dunst = {
+   services.dunst = {
     enable = true;
     settings.global = {
       font = "Monospace 10";
-      frame_color = "#241571";
+      frame_color = "#C5C8C6";
     };
     settings = {
       urgency_normal = {
@@ -86,9 +90,9 @@
       timeout = 15;
      };
     };
-  };
+  }; 
 
- /*  programs.kitty = {
+   /* programs.kitty = {
     enable = true;
     theme = "~/.config/kitty/theme.conf";
     settings = {
@@ -103,15 +107,15 @@
       window_logo_alpha = "0.8";
       window_margin_width = 5;
     };
-  }; */
+  };  */
   
-  gtk = {
+   gtk = {
     enable = true;
     gtk3.extraConfig = {
     gtk-theme-name = "Material-Black-Blueberry";
     gtk-icon-theme-name = "Tela-grey-dark";
     };
-  };
+  }; 
 
   services.sxhkd = {
     enable = true;
@@ -160,19 +164,18 @@
   '';
   };
 
-    xsession = {
+  xsession = {
     enable = true;
     profileExtra = ''
     sxhkd &
-    feh --bg-scale /home/marin/Pictures/wallhaven-3l6xw6.png
+    feh --bg-scale /home/marin/Pictures/wallhaven-7pjjvv.jpg
     /home/marin/dwm-bar/dwm_bar.sh &
-    polybar topleft &
-    polybar botright &
-    polybar workind &
-  '';
-  }; 
 
-  services.polybar.enable = true;
+    
+  '';
+  };  
+
+   services.polybar.enable = true;
 
   services.polybar.config = {
   "colors" = {
@@ -188,10 +191,11 @@
 
 
 
-    "bar/topleft" = {
+    /* "bar/topleft" = {
     width = "9%";
     height = "24pt";
     radius = 0;
+    offset-x = "81%";
     background = "#000000";
     foreground = "#C5C8C6";
     line-size = "3pt";
@@ -206,48 +210,45 @@
     modules-center = "cpu memory";
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
-    override-redirect = "true";
-    bottom = "true";
+    override-redirect = "false";
+    bottom = "false";
     enable-ipc = "true";
-    };
+    }; */
 
-    "bar/botright" = {
-    width = "9%";
-    height = "24pt";
-    radius = 0;
-    bottom = "true";
-    offset-x = "91%";
-    background = "#000000";
-    foreground = "#C5C8C6";
-    line-size = "3pt";
-    border-size = "2pt";
-    border-color = "#C5C8C6";
-    padding-left = 0;
-    padding-right = 1;
-    module-margin = 1;
-    separator = "|";
-    separator-foreground = "#707880";
-    font-0 = "NotoSans:weight=bold;2";
-    modules-center = "date ";
-    cursor-click = "pointer";
-    cursor-scroll = "ns-resize";
-    enable-ipc = "true";
-    wm-restack = "generic";
-    override-redirect = "true";
-    };
-
-    "bar/workind" = {
-    width = "2%";
-    height = "24pt";
+   "bar/topright" = {
+    width = "16%";
+    height = "15pt";
+    offset-x = "84%";
     radius = 0;
     background = "#C5C8C6";
     foreground = "#000000";
     line-size = "0pt";
     border-size = "2pt";
-    border-color = "#000000";
+    border-color = "#C5C8C6";
+    padding-left = 0;
+    padding-right = 0;
+    module-margin = 0;
+    separator = "|";
+    separator-foreground = "#707880";
+    font-0 = "NotoSans:weight=bold;2";
+    modules-center = "cpu memory date";
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+    override-redirect = "false";
+    };
+
+    "bar/workind" = {
+    width = "2%";
+    height = "15pt";
+    radius = 0;
+    background = "#C5C8C6";
+    foreground = "#000000";
+    line-size = "0pt";
+    border-size = "2pt";
+    border-color = "#C5C8C6";
     padding-left = 0;
     padding-right = 1;
-    module-margin = 1;
+    module-margin = 0;
     separator = "|";
     separator-foreground = "#707880";
     font-0 = "NotoSans:weight=bold;2";
@@ -255,7 +256,31 @@
     modules-center = "xworkspaces";
     cursor-click = "pointer";
     cursor-scroll = "ns-resize";
-    override-redirect = "true";
+    override-redirect = "false";
+    };
+
+    "bar/name" = {
+    width = "82%";
+    height = "15pt";
+    radius = 0;
+    offset-x = "2%";
+    background = "#000000";
+    foreground = "#C5C8C6";
+    line-size = "0pt";
+    border-size = "2pt";
+    border-color = "#000000";
+    padding-left = 3;
+    padding-right = 0;
+    module-margin = 0;
+    separator = "|";
+    separator-foreground = "#707880";
+    font-0 = "NotoSansMono:style=Bold:antialias=true;2";
+    modules-left = "xwindow";
+    # modules-right = "info-cava";
+    cursor-click = "pointer";
+    cursor-scroll = "ns-resize";
+    override-redirect = "false";
+    enable-ipc = "true";
     };
 
     "module/xworkspaces" = {
@@ -281,17 +306,21 @@
     type = "internal/memory";
     interval = 2;
     format-prefix = "RAM ";
-    format-prefix-foreground = "#C5C8C6";
+    format-prefix-foreground = "#000000";
     label = "%percentage_used:2%%";
     label-active-font = 1;
     };
 
+    "module/xwindow" = {
+    type = "internal/xwindow";
+    label = "%title:0:200:...%";
+    };
 
     "module/cpu" = {
     type = "internal/cpu";
     interval = 2;
     format-prefix = "CPU ";
-    format-prefix-foreground = "#C5C8C6";
+    format-prefix-foreground = "#000000";
     label = "%percentage:2%%";
     label-active-font = 1;
     };
@@ -299,11 +328,26 @@
     "module/date" = {
     type = "internal/date";
     interval = 1;
-    date = "%H:%M";
-    date-alt = "%d-%m %H:%M";
+    date-alt = "%H:%M";
+    date = "%d/%m/%y %H:%M";
     label = "%date%";
-    label-foreground = "#C5C8C6";
+    label-foreground = "#000000";
     label-active-font = 1;
+    };
+
+    "module/info-cava" = {
+    type = "custom/script";
+    exec = "/home/marin/Documents/info-cava.py -f 24 -b 12 -e fffdfc,fffafe,ffeafa,ffc3d2 -c average";
+    tail = "true";
+    };
+
+    "module/cava" = {
+    type = "custom/script";
+    tail = "true";
+    exec = "$HOME/.config/cava.sh";
+    format = "<label>";
+    format-font = 5;
+    label = "%output%";
     };
 
     "settings" = {
@@ -311,17 +355,17 @@
     pseudo-transparency = "false";
     };
   };
-
+ 
   services.polybar.script = ''
     "polybar topleft &amp;"
     "polybar botright &amp;"
     "polybar workind &amp;"
   ''
-  ;
+  ; 
  
   
-
-
+  services.espanso.enable = true;
+ 
 
 
   # Let Home Manager install and manage itself.
