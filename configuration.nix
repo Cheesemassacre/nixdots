@@ -48,19 +48,18 @@
   console.keyMap = "croat";
 
   # Fish shell.
-  programs.fish.enable = true;
+  # programs.fish.enable = true;
   
-  # Display Manager.
+  #  Display Manager.
   services.xserver.displayManager = {
 	lightdm.enable = true;
   	autoLogin = {
 		enable = true;
 		user = "marin";
 	};
-  };
+  }; 
 
   # Services/other.
-  services.picom.enable = false;
   virtualisation.libvirtd.enable = true; 
   services.flatpak.enable = true;
   services.dbus.enable = true;
@@ -72,8 +71,20 @@
   nixpkgs.config.allowUnfree = true;
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+  # Hyprland
+  # programs.hyprland.enable = true;
+  # Optional, hint electron apps to use wayland:
+  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # services.xserver.windowManager.windowmaker.enable = true;
+  # services.xserver.windowManager.openbox.enable = true;
+  # services.xserver.windowManager.fluxbox.enable = true;
+  # services.xserver.windowManager.i3.enable = true;
+  # services.xserver.windowManager.herbstluftwm.enable = true;
+  # services.xserver.windowManager.berry.enable = true;
+  
 
-
+  xdg.portal.config.common.default = "*";
+  
 
   # Enable sound with pipewire.
   services.pipewire = {
@@ -102,7 +113,7 @@
     dunst
     dwm
     feh
-    fish
+    # fish
     fontconfig
     freetype
     gcc
@@ -120,7 +131,6 @@
     nodejs
     pamixer
     pavucontrol
-    picom
     polkit_gnome
     ripgrep
     rofi
@@ -152,10 +162,33 @@
     htop
     psmisc
     vlc
-    
-	
+    libnotify
+    obs-studio
+    picom
+    nicotine-plus
+    unzip
+    imv
+    qalculate-gtk
+    mc
+    ranger
+    tty-clock
+    cava
+    cmatrix
+    pfetch
+    mpv
+    brave
+    gnome-multi-writer
+    rhythmbox
+    espanso
+    etcher
+    xfce.xfconf
 	
   ];
+
+  # Electron out of date
+  nixpkgs.config.permittedInsecurePackages = [
+                "electron-19.1.9"
+              ];
 
   # Dwm and dmenu compile.
   nixpkgs.overlays = [
@@ -173,7 +206,8 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-  
+ 
+
   # Polkit.
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -203,23 +237,21 @@
 
   # Fonts.
   fonts = {
-      fonts = with pkgs; [
+      packages = with pkgs; [
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
         font-awesome
         hack-font
         source-han-sans
-        source-han-sans-japanese
-        source-han-serif-japanese
         (nerdfonts.override { fonts = [ "Meslo" "FiraMono" ]; })
       ];
       fontconfig = {
         enable = true;
         defaultFonts = {
-          monospace = [ "FiraMono Nerd Font" ];
-          serif = [ "DejaVu Serif" "Source Han Serif" ];
-          sansSerif = [ "Source Han Sans" ];
+          monospace = [ "Hack" ];
+          serif = [ "Noto Serif" ];
+          sansSerif = [ "Noto Sans" ];
         };
       };
   };
